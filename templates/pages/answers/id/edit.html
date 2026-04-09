@@ -1,0 +1,45 @@
+{% extends "layouts/page.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block page_id %}edit-id-answers-page{% endblock %}
+
+{% block page_header_modifier %}{% endblock %}
+
+{% block page_header %}
+    <h1 class="page__title">{{ title }}</h1>
+{% endblock %}
+
+{% block page_body %}
+    <p class="page__error">
+        Unable to edit your answer. Please check the form and try again. If the problem persists, try again
+        later.
+    </p>
+
+    <form
+        id="edit-id-answers-form"
+        class="form form--field-w_md page__form"
+        method="post"
+        action="{% url 'answer_edit' id=answer.id %}"
+        enctype="multipart/form-data"
+    >
+        <div class="form__row">
+            <label class="form__label form__label--pos_top" for="edit-id-answers-form-text">
+                Answer<span class="form__asterisk">*</span>
+            </label>
+            <textarea
+                id="edit-id-answers-form-text"
+                class="form__field form__field--type_textarea"
+                name="text"
+                minlength="32"
+                maxlength="30000"
+                required
+                placeholder="Enter your answer here."
+            >{{ answer.text }}</textarea>
+        </div>
+
+        <button class="form__submit btn btn--color_white" type="submit">Save</button>
+    </form>
+{% endblock %}
+
+{% block page_footer %}{% endblock %}

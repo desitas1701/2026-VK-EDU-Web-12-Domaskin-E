@@ -1,0 +1,23 @@
+.tags-list {
+    list-style: none;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1ch;
+}
+
+.tags-list__item {}
+
+.tag {
+    border: 2px solid var(--color-black);
+    border-radius: 4px;
+
+    padding: 2px 4px;
+
+    font-weight: bold;
+
+    color: var(--color-black) !important;
+    text-decoration: none;
+
+    display: inline-block;
+}

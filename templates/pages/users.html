@@ -1,0 +1,27 @@
+{% extends "layouts/page.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block page_id %}users-page{% endblock %}
+
+{% block page_header_modifier %}{% endblock %}
+
+{% block page_header %}
+    <h1 class="page__title">{{ title }}</h1>
+{% endblock %}
+
+{% block page_body %}
+    <ol class="cards-list page__cards-list">
+        {% for user in users %}
+            <li class="cards-list__item">
+                {% include "components/cards/user.html" with user=user %}
+            </li>
+        {% endfor %}
+    </ol>
+{% endblock %}
+
+{% block page_footer %}
+    <div class="page__pagination">
+        {% include "components/pagination.html" with page=page %}
+    </div>
+{% endblock %}

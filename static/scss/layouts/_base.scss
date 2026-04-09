@@ -1,0 +1,180 @@
+.body {
+    --sidebar-min-width: 300px;
+    --sidebar-max-width: 25vw;
+
+    display: grid;
+    grid-template-areas:
+        "header header header header"
+        ". content sidebar ."
+        "footer footer footer footer";
+    grid-template-rows:
+        auto
+        1fr
+        auto;
+    grid-template-columns:
+        0
+        minmax(300px, 1fr)
+        minmax(var(--sidebar-min-width), var(--sidebar-max-width))
+        0;
+    gap: 20px;
+}
+
+.header {
+    grid-area: header;
+
+    border-top: 3px solid var(--color-orange);
+    border-bottom: 1px solid var(--color-gray);
+
+    padding: 10px 20px;
+
+    display: flex;
+    gap: 20px;
+}
+
+.header__logo {
+    flex: 0 1 15vw;
+    min-width: 250px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .g-logo {
+        color: var(--color-black) !important;
+        text-decoration: none;
+    
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .g-logo__image {}
+    
+    .g-logo__text {
+        font-size: var(--h2-font-size);
+        font-weight: bold;
+    }
+}
+
+.header__search-form {
+    flex: 1 1 auto;
+    min-width: 200px;
+
+    display: flex;
+    align-items: center;
+}
+
+.header__ask-button {
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: center;
+
+    .g-ask-button {
+        font-weight: bold;
+    }
+}
+
+.header__user {
+    flex: 0 1 var(--sidebar-max-width);
+    min-width: var(--sidebar-min-width);
+
+    display: flex;
+    align-items: center;
+
+    .g-user {}
+
+    .g-user--role_member {
+        display: grid;
+        grid-template-areas:
+            "avatar nickname"
+            "avatar ."
+            "avatar actions";
+        grid-template-rows:
+            auto
+            1fr
+            auto;
+        grid-template-columns:
+            auto
+            auto;
+        column-gap: 10px;
+    }
+
+    .g-user__avatar {
+        grid-area: avatar;
+    }
+    
+    .g-user__nickname {
+        grid-area: nickname;
+    }
+    
+    .g-user__actions-list {
+        grid-area: actions;
+
+        .g-actions-list {
+            list-style: none;
+
+            display: flex;
+            gap: 10px;
+        }
+
+        .g-actions-list__item {}
+    }
+    
+    .g-user__action {}
+    
+    .g-user--role_guest {
+        height: 64px;
+    
+        display: flex;
+        align-items: center;
+    }
+}
+
+.content {
+    grid-area: content;
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
+
+.sidebar__sections-list {
+    &.g-sections-list,
+    .g-sections-list {
+        list-style: none;
+
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .g-sections-list__item {}
+
+    &.g-section,
+    .g-section {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .g-section__title {}
+
+    .g-section__body {}
+}
+
+.footer {
+    grid-area: footer;
+
+    height: 48px;
+
+    border-top: 1px solid var(--color-gray);
+
+    padding: 0 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer__copyright {}

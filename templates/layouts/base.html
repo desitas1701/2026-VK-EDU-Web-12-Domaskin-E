@@ -1,0 +1,149 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block title %}/templates/layouts/base.html{% endblock %}
+
+{% block body %}
+    <header class="header">
+        <div class="header__logo">
+            <a class="g-logo" href="{% url 'index' %}">
+                <img
+                    class="g-logo__image img img--size_md"
+                    src="{% static 'images/favicon.png' %}"
+                    alt="Logo image"
+                />
+                <span class="g-logo__text">AskPupkin</span>
+            </a>
+        </div>
+
+        <div class="header__search-form">
+            <form
+                id="search-form"
+                class="form form--labels-hidden form--field-w_full"
+                method="get"
+                action="{% url 'search' %}"
+            >
+                <div class="form__row">
+                    <label class="form__label" for="search-form-q">
+                        Search<span class="form__asterisk">*</span>
+                    </label>
+                    <input
+                        id="search-form-q"
+                        class="form__field form__field--type_search"
+                        type="search"
+                        name="q"
+                        maxlength="256"
+                        required
+                        placeholder="🔍 Search"
+                    />
+                </div>
+            </form>
+        </div>
+
+        {% if user.is_authenticated %}
+        <div class="header__ask-button">
+            <a class="g-ask-button btn btn--color_orange" href="{% url 'question_ask' %}">ASK</a>
+        </div>
+        {% endif %}
+        
+        <div class="header__user">
+            {% if user.is_authenticated %}
+            <div class="g-user g-user--role_member">
+                <img
+                    class="g-user__avatar img img--size_md"
+                    src="{% static user.avatar_url %}"
+                    alt="Avatar of {{ user.nickname }}"
+                />
+                <span class="g-user__nickname">{{ user.nickname }}</span>
+                <div class="g-user__actions-list">
+                    <ul class="g-actions-list">
+                        <li class="g-actions-list__item">
+                            <a
+                                class="g-user__action btn btn--color_white"
+                                href="{% url 'user' id=user.id %}"
+                            >Profile</a>
+                        </li>
+
+                        <li class="g-actions-list__item">
+                            <a
+                                class="g-user__action btn btn--color_white"
+                                href="{% url 'user_settings' %}"
+                            >Settings</a>
+                        </li>
+
+                        <li class="g-actions-list__item">
+                            <a
+                                class="g-user__action btn btn--color_white"
+                                href="{% url 'user_logout' %}"
+                            >Log Out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {% else %}
+            <div class="g-user g-user--role_guest">
+                <div class="g-user__actions-list">
+                    <ul class="g-actions-list">
+                        <li class="g-actions-list__item">
+                            <a
+                                class="g-user__action btn btn--color_white"
+                                href="{% url 'user_login' %}"
+                            >Log In</a>
+                        </li>
+
+                        <li class="g-actions-list__item">
+                            <a
+                                class="g-user__action btn btn--color_white"
+                                href="{% url 'user_signup' %}"
+                            >Sign Up</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <aside class="sidebar">
+        <ul class="g-sections-list sidebar__sections-list">
+            <li class="g-sections-list__item">
+                <section class="g-section">
+                    <h2 class="g-section__title">Popular Tags</h2>
+        
+                    <ul class="tags-list g-section__body">
+                        {% for tag in tags %}
+                        <li class="tags-list__item">
+                            <a class="tag" href="{% url 'tag' tag=tag.name %}">{{ tag.name }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            </li>
+
+            <li class="g-sections-list__item">
+                <section class="g-section">
+                    <h2 class="g-section__title">Best Members</h2>
+
+                    <ul class="members-list g-section__body">
+                        {% for member in members %}
+                        <li class="members-list__item">
+                            <a class="member" href="{% url 'user' id=member.id %}">{{ member.nickname }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            </li>
+        </ul>
+    </aside>
+
+    <footer class="footer">
+        <span class="footer__copyright">
+            Copyright © 2026 Egor Domaskin, student of VK Education WEB-12. All rights reserved.
+        </span>
+    </footer>
+{% endblock %}

@@ -1,0 +1,112 @@
+.form {
+    --label-min-width: 100px;
+    --label-max-width: 150px;
+
+    --field-min-width: 200px;
+    --field-max-width: 300px;
+
+    --gap: 20px;
+    --submit-gap-mult: 2;
+
+    width: 100%;
+
+    display: grid;
+    grid-template-columns:
+        minmax(var(--label-min-width), var(--label-max-width))
+        minmax(var(--field-min-width), var(--field-max-width));
+    gap: var(--gap);
+}
+
+.form--labels-hidden {
+    grid-template-columns:
+        minmax(var(--field-min-width), var(--field-max-width));
+    
+    .form__label {
+        @include visually-hidden();
+    }
+    
+    :is(.form__field, .form__submit) {
+        grid-column: 1;
+    }
+}
+
+.form--field-w_md {
+    --field-max-width: 600px;
+}
+
+.form--field-w_full {
+    --field-max-width: 100%;
+}
+
+.form__row {
+    display: contents;
+}
+
+.form__label {
+    grid-column: 1;
+
+    align-self: center;
+}
+
+.form__label--pos_top {
+    align-self: start;
+}
+
+.form__asterisk {
+    color: var(--color-red);
+}
+
+.form__field {
+    grid-column: 2;
+
+    &:not(.form__field--type_image-upload, .form__field--type_textarea) {
+        height: 32px;
+    }
+
+    &:not(.form__field--type_image-upload) {
+        border: 2px solid var(--color-black);
+    
+        padding: 8px;
+
+        &:focus-visible {
+            outline: 2px solid var(--color-orange);
+            outline-offset: 2px;
+        }
+    }
+}
+
+.form__field--type_search {
+    border-radius: 16px;
+}
+
+.form__field--type_input {}
+
+.form__field--type_textarea {
+    min-height: 320px;
+
+    resize: vertical;
+}
+
+.form__field--type_image-upload {
+    &.g-image-upload {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .g-image-upload__thumbnail {}
+    
+    .g-image-upload__button {}
+    
+    .g-image-upload__label {}
+    
+    .g-image-upload__input {
+        @include visually-hidden();
+    }
+}
+
+.form__submit {
+    grid-column: 2;
+
+    margin-top: calc((var(--submit-gap-mult) - 1) * var(--gap));
+}

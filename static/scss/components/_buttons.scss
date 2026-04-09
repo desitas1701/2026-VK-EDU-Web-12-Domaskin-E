@@ -1,0 +1,86 @@
+.btn {
+    --btn-bg:        transparent;
+    --btn-bg-hover:  transparent;
+    --btn-bg-active: transparent;
+
+    width: max-content;
+    height: 32px;
+
+    position: relative;
+    top: -3px;
+
+    border: 3px solid var(--color-black);
+    box-shadow: 3px 3px 0 0 var(--color-neutral-800);
+
+    padding: 0 16px;
+
+    background-color: var(--btn-bg);
+
+    font-family: inherit;
+    font-size: inherit;
+
+    color: var(--color-black) !important;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        background-color: var(--btn-bg-hover);
+    }
+
+    &:active {
+        transform: translate(3px, 3px);
+
+        box-shadow: none;
+
+        background-color: var(--btn-bg-active);
+    }
+}
+
+.btn--state_active {
+    transform: translate(3px, 3px);
+
+    box-shadow: none;
+
+    background-color: var(--btn-bg-active);
+}
+
+.btn--state_disabled {
+    border-color: var(--color-neutral-400);
+    box-shadow: 3px 3px 0 0 var(--color-neutral-400);
+
+    background-color: var(--color-neutral-100);
+
+    color: var(--color-neutral-400) !important;
+
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btn--color_white {
+    --btn-bg:        var(--color-white);
+    --btn-bg-hover:  var(--color-neutral-200);
+    --btn-bg-active: var(--color-neutral-300);
+}
+
+.btn--color_red {
+    --btn-bg:        var(--color-red-500);
+    --btn-bg-hover:  var(--color-red-700);
+    --btn-bg-active: var(--color-red-900);
+}
+
+.btn--color_orange {
+    --btn-bg:        var(--color-orange-500);
+    --btn-bg-hover:  var(--color-orange-700);
+    --btn-bg-active: var(--color-orange-900);
+}
+
+.btn--color_green {
+    --btn-bg:        var(--color-green-500);
+    --btn-bg-hover:  var(--color-green-700);
+    --btn-bg-active: var(--color-green-900);
+}

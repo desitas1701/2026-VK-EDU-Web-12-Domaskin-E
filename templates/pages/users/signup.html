@@ -1,0 +1,145 @@
+{% extends "layouts/page.html" %}
+
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block page_id %}signup-users-page{% endblock %}
+
+{% block page_header_modifier %}{% endblock %}
+
+{% block page_header %}
+    <h1 class="page__title">{{ title }}</h1>
+{% endblock %}
+
+{% block page_body %}
+    <p class="page__error">
+        Sign up failed. Please check the form and try again. If the problem persists, try again later.
+    </p>
+
+    <form
+        id="signup-users-form"
+        class="form page__form"
+        method="post"
+        action="{% url 'users' %}"
+        enctype="multipart/form-data"
+    >
+        <div class="form__row">
+            <label class="form__label" for="signup-users-form-login">
+                Login<span class="form__asterisk">*</span>
+            </label>
+            <input
+                id="signup-users-form-login"
+                class="form__field form__field--type_input"
+                type="text"
+                name="login"
+                minlength="2"
+                maxlength="32"
+                pattern="^[a-zA-Z0-9_-]+$"
+                required
+                placeholder="dr_pepper"
+            />
+        </div>
+
+        <div class="form__row">
+            <label class="form__label" for="signup-users-form-email">
+                Email<span class="form__asterisk">*</span>
+            </label>
+            <input
+                id="signup-users-form-email"
+                class="form__field form__field--type_input"
+                type="email"
+                name="email"
+                minlength="7"
+                maxlength="254"
+                required
+                placeholder="dr.pepper@example.com"
+            />
+        </div>
+
+        <div class="form__row">
+            <label class="form__label" for="signup-users-form-nickname">
+                Nickname<span class="form__asterisk">*</span>
+            </label>
+            <input
+                id="signup-users-form-nickname"
+                class="form__field form__field--type_input"
+                type="text"
+                name="nickname"
+                minlength="2"
+                maxlength="64"
+                required
+                placeholder="Dr. Pepper"
+            />
+        </div>
+
+        <div class="form__row">
+            <label class="form__label" for="signup-users-form-password">
+                Password<span class="form__asterisk">*</span>
+            </label>
+            <input
+                id="signup-users-form-password"
+                class="form__field form__field--type_input"
+                type="password"
+                name="password"
+                minlength="8"
+                maxlength="128"
+                required
+                placeholder="••••••••"
+            />
+        </div>
+
+        <div class="form__row">
+            <label class="form__label" for="signup-users-form-confirm-password">
+                Confirm password<span class="form__asterisk">*</span>
+            </label>
+            <input 
+                id="signup-users-form-confirm-password"
+                class="form__field form__field--type_input"
+                type="password"
+                name="confirm_password"
+                minlength="8"
+                maxlength="128"
+                required
+                placeholder="••••••••"
+            />
+        </div>
+
+        <div class="form__row">
+            <label
+                class="form__label form__label--pos_top"
+                for="signup-users-form-avatar"
+            >Upload avatar</label>
+
+            <div class="g-image-upload form__field--type_image-upload">
+                <img
+                    class="g-image-upload__thumbnail img img--size_lg"
+                    src="{% static 'images/default_avatar.png' %}"
+                    alt="Default avatar"
+                />
+
+                <div class="g-image-upload__button">
+                    <label
+                        class="g-image-upload__label btn btn--color_white"
+                        for="signup-users-form-avatar"
+                    >Choose</label>
+                    <input
+                        id="signup-users-form-avatar"
+                        class="g-image-upload__input"
+                        type="file"
+                        name="avatar"
+                        accept="image/jpeg,image/png,image/gif,image/webp"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <button class="form__submit btn btn--color_white" type="submit">Sign Up</button>
+    </form>
+
+    <p class="page__hint">
+        Already have an account? <a class="page__link" href="{% url 'user_login' %}">Log in</a>
+    </p>
+{% endblock %}
+
+{% block page_footer %}{% endblock %}

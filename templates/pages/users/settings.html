@@ -1,0 +1,158 @@
+{% extends "layouts/page.html" %}
+
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block page_id %}settings-users-page{% endblock %}
+
+{% block page_header_modifier %}{% endblock %}
+
+{% block page_header %}
+    <h1 class="page__title">{{ title }}</h1>
+{% endblock %}
+
+{% block page_body %}
+    <p class="page__error">
+        Saving changes failed. Please check the form and try again. If the problem persists, try again later.
+    </p>
+
+    <form
+        id="settings-users-form"
+        class="form page__form"
+        method="put"
+        action="{% url 'user' id=user.id %}"
+        enctype="multipart/form-data"
+    >
+        <div class="form__row">
+            <label class="form__label" for="settings-users-form-login">
+                Login<span class="form__asterisk">*</span>
+            </label>
+            <input
+                id="settings-users-form-login"
+                class="form__field form__field--type_input"
+                type="text"
+                name="login"
+                minlength="2"
+                maxlength="32"
+                pattern="^[a-zA-Z0-9_-]+$"
+                required
+                value="{{ user.login }}"
+                placeholder="dr_pepper"
+            />
+        </div>
+
+        <div class="form__row">
+            <label class="form__label" for="settings-users-form-email">
+                Email<span class="form__asterisk">*</span>
+            </label>
+            <input
+                id="settings-users-form-email"
+                class="form__field form__field--type_input"
+                type="email"
+                name="email"
+                minlength="7"
+                maxlength="254"
+                required
+                value="{{ user.email }}"
+                placeholder="dr.pepper@example.com"
+            />
+        </div>
+
+        <div class="form__row">
+            <label class="form__label" for="settings-users-form-nickname">
+                Nickname<span class="form__asterisk">*</span>
+            </label>
+            <input
+                id="settings-users-form-nickname"
+                class="form__field form__field--type_input"
+                type="text"
+                name="nickname"
+                minlength="2"
+                maxlength="64"
+                required
+                value="{{ user.nickname }}"
+                placeholder="Dr. Pepper"
+            />
+        </div>
+
+        <div class="form__row">
+            <label class="form__label" for="settings-users-form-password">
+                Password<span class="form__asterisk">*</span>
+            </label>
+            <input
+                id="settings-users-form-password"
+                class="form__field form__field--type_input"
+                type="password"
+                name="password"
+                minlength="8"
+                maxlength="128"
+                required
+                placeholder="••••••••"
+            />
+        </div>
+
+        <div class="form__row">
+            <label class="form__label" for="settings-users-form-new-password">
+                New password
+            </label>
+            <input
+                id="settings-users-form-new-password"
+                class="form__field form__field--type_input"
+                type="password"
+                name="new_password"
+                minlength="8"
+                maxlength="128"
+                placeholder="••••••••"
+            />
+        </div>
+
+        <div class="form__row">
+            <label class="form__label" for="settings-users-form-confirm-new-password">
+                Confirm new password
+            </label>
+            <input 
+                id="settings-users-form-confirm-new-password"
+                class="form__field form__field--type_input"
+                type="password"
+                name="confirm_new_password"
+                minlength="8"
+                maxlength="128"
+                placeholder="••••••••"
+            />
+        </div>
+
+        <div class="form__row">
+            <label
+                class="form__label form__label--pos_top"
+                for="settings-users-form-avatar"
+            >Upload avatar</label>
+
+            <div class="g-image-upload form__field--type_image-upload">
+                <img
+                    class="g-image-upload__thumbnail img img--size_lg"
+                    src="{% static user.avatar_url %}"
+                    alt="Avatar of {{ user.nickname }}"
+                />
+
+                <div class="g-image-upload__button">
+                    <label
+                        class="g-image-upload__label btn btn--color_white"
+                        for="settings-users-form-avatar"
+                    >Choose</label>
+                    <input
+                        id="settings-users-form-avatar"
+                        class="g-image-upload__input"
+                        type="file"
+                        name="avatar"
+                        accept="image/jpeg,image/png,image/gif,image/webp"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <button class="form__submit btn btn--color_white" type="submit">Save</button>
+    </form>
+{% endblock %}
+
+{% block page_footer %}{% endblock %}

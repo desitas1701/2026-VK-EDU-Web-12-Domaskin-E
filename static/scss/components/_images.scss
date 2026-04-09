@@ -1,0 +1,16 @@
+.img {
+    width: var(--img-size); 
+    height: var(--img-size);
+}
+
+.img--size_sm {
+    --img-size: 32px;
+}
+
+.img--size_md {
+    --img-size: 64px;
+}
+
+.img--size_lg {
+    --img-size: 128px;
+}

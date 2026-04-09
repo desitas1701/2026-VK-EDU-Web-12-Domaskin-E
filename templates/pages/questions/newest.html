@@ -1,0 +1,39 @@
+{% extends "layouts/page.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block page_id %}newest-questions-page{% endblock %}
+
+{% block page_header_modifier %}page__header--layout_horizontal{% endblock %}
+
+{% block page_header %}
+    <h1 class="page__title">{{ title }}</h1>
+
+    <nav class="nav page__tabs">
+        <ul class="nav__list">
+            <li class="nav__item">
+                <a class="nav__link nav__link--state_active" href="{% url 'questions_newest' %}">Newest</a>
+            </li>
+
+            <li class="nav__item">
+                <a class="nav__link" href="{% url 'questions_hottest' %}">Hottest</a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}
+
+{% block page_body %}
+    <ol class="cards-list page__cards-list">
+        {% for question in questions %}
+            <li class="cards-list__item">
+                {% include "components/cards/question.html" with user=user question=question %}
+            </li>
+        {% endfor %}
+    </ol>
+{% endblock %}
+
+{% block page_footer %}
+    <div class="page__pagination">
+        {% include "components/pagination.html" with page=page %}
+    </div>
+{% endblock %}
