@@ -1,0 +1,55 @@
+{% load custom_tags %}
+<nav class="nav">
+    <ol class="nav__list">
+        <li class="nav__item">
+            <a
+                class="nav__link {% if not page.has_previous %}nav__link--state_disabled{% endif %}"
+                href="?{% update_query page=1 %}"
+            >◀◀</a>
+        </li>
+
+        <li class="nav__item">
+            {% if page.has_previous %}
+            <a
+                class="nav__link"
+                href="?{% update_query page=page.previous_page_number %}"
+            >◀</a>
+            {% else %}
+            <a
+                class="nav__link nav__link--state_disabled"
+                href="?{% update_query page=1 %}"
+            >◀</a>
+            {% endif %}
+        </li>
+
+        {% for page_num in page.get_page_window %}
+        <li class="nav__item">
+            <a
+                class="nav__link {% if page_num == page.number %}nav__link--state_active{% endif %}"
+                href="?{% update_query page=page_num %}"
+            >{{ page_num }}</a>
+        </li>
+        {% endfor %}
+
+        <li class="nav__item">
+            {% if page.has_next %}
+            <a
+                class="nav__link"
+                href="?{% update_query page=page.next_page_number %}"
+            >▶</a>
+            {% else %}
+            <a
+                class="nav__link nav__link--state_disabled"
+                href="?{% update_query page=page.paginator.num_pages %}"
+            >▶</a>
+            {% endif %}
+        </li>
+        
+        <li class="nav__item">
+            <a
+                class="nav__link {% if not page.has_next %}nav__link--state_disabled{% endif %}"
+                href="?{% update_query page=page.paginator.num_pages %}"
+            >▶▶</a>
+        </li>
+    </ol>
+</nav>

@@ -1,0 +1,41 @@
+{% load static %}
+
+<article class="card card--type_interactive-answer">
+    <div class="card__meta">
+        <div class="g-author card__author">
+            <img
+                class="g-author__avatar img img--size_md"
+                src="{% static user.avatar_url %}"
+                alt="Avatar of {{ user.nickname }}"
+            />
+            <a class="g-author__link" href="{% url 'user' id=user.id %}">
+                <span class="g-author__nickname">{{ user.nickname }}</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="card__body">
+        <form
+            class="form form--labels-hidden form--field-w_full card__form"
+            method="post"
+            action="{% url 'question' id=question.id %}"
+        >
+            <div class="form__row">
+                <label class="form__label" for="answer-form-answer">
+                    Answer<span class="form__asterisk">*</span>
+                </label>
+                <textarea
+                    id="answer-form-answer"
+                    class="form__field form__field--type_textarea"
+                    name="answer"
+                    minlength="32"
+                    maxlength="32000"
+                    required
+                    placeholder="Enter your answer here."
+                ></textarea>
+            </div>
+    
+            <button class="form__submit btn btn--color_white" type="submit">Answer</button>
+        </form>
+    </div>
+</article>

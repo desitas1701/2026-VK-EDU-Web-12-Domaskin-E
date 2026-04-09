@@ -1,0 +1,74 @@
+/* =========================== Document =========================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* ============================= Body ============================= */
+body {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* ========================== Typography ========================== */
+h1 {
+    font-size: var(--h1-font-size);
+}
+
+h2 {
+    font-size: var(--h2-font-size);
+}
+
+h3 {
+    font-size: var(--h3-font-size);
+}
+
+h4 {
+    font-size: var(--h4-font-size);
+}
+
+h5 {
+    font-size: var(--h5-font-size);
+}
+
+h6 {
+    font-size: var(--h6-font-size);
+}
+
+
+/* ============================ Lists ============================= */
+ol,
+ul {
+    list-style-position: inside;
+}
+
+
+/* ============================ Links ============================= */
+a {
+    &:link {
+        color: var(--color-blue);
+    }
+
+    &:visited {
+        color: var(--color-purple);
+    }
+
+    &:hover {
+        color: var(--color-blue);
+    }
+
+    &:active {
+        color: var(--color-red);
+    }
+}

@@ -1,0 +1,29 @@
+{% extends "layouts/page.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block page_id %}id-questions-page{% endblock %}
+
+{% block page_header_modifier %}{% endblock %}
+
+{% block page_header %}
+    {% include "components/cards/question.html" with user=user question=question %}
+{% endblock %}
+
+{% block page_body %}
+    <ol class="cards-list page__cards-list">
+        {% if user.is_authenticated %}
+            <li class="cards-list__item">
+                {% include "components/cards/answer/interactive.html" with user=user %}
+            </li>
+        {% endif %}
+
+        {% for answer in answers %}
+            <li class="cards-list__item">
+                {% include "components/cards/answer/static.html" with user=user answer=answer %}
+            </li>
+        {% endfor %}
+    </ol>
+{% endblock %}
+
+{% block page_footer %}{% endblock %}

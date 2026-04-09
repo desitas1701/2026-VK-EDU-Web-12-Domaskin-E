@@ -1,0 +1,27 @@
+{% load static %}
+
+<article class="card card--type_user">
+    <div class="card__meta">
+        <div class="g-author card__author">
+            <img
+                class="g-author__avatar img img--size_lg"
+                src="{% static user.avatar_url %}"
+                alt="Avatar of {{ user.nickname }}"
+            />
+        </div>
+    </div>
+
+    <header class="card__header">
+        <a class="card__link" href="{% url 'user' id=user.id %}">
+            <h3 class="card__title">{{ user.nickname }}</h3>
+        </a>
+    </header>
+
+    <div class="card__body">
+        <div class="card__text">
+            <p class="card__paragraph">
+                ✉️ {{ user.email }}
+            </p>
+        </div>
+    </div>
+</article>

@@ -1,0 +1,19 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}/templates/layouts/page.html{% endblock %}
+
+{% block content %}
+    <article id="{% block page_id %}page{% endblock %}" class="page">
+        <header class="page__header {% block page_header_modifier %}{% endblock %}">
+            {% block page_header %}{% endblock %}
+        </header>
+
+        <div class="page__body">
+            {% block page_body %}{% endblock %}
+        </div>
+
+        <footer class="page__footer">
+            {% block page_footer %}{% endblock %}
+        </footer>
+    </article>
+{% endblock %}

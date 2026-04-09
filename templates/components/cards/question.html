@@ -1,0 +1,86 @@
+{% load static %}
+{% load custom_tags %}
+
+<article class="card card--type_question">
+    <div class="card__meta">
+        <div class="g-author card__author">
+            <img
+                class="g-author__avatar img img--size_md"
+                src="{% static question.author.avatar_url %}"
+                alt="Avatar of {{ question.author.nickname }}"
+            />
+            <a class="g-author__link" href="{% url 'user' id=question.author.id %}">
+                <span class="g-author__nickname">{{ question.author.nickname }}</span>
+            </a>
+        </div>
+
+        {% if question.is_solved %}
+        <span class="card__status card__status--color_green">Solved</span>
+        {% endif %}
+
+        <ul class="g-stats-list card__stats-list">
+            <li class="g-stats-list__item g-stats-list__item--important">
+                <span class="g-stats-list__number">{{ question.stats.votes }}</span>
+                <span class="g-stats-list__unit">votes</span>
+            </li>
+
+            <li class="g-stats-list__item">
+                <span class="g-stats-list__number">{{ question.stats.answers }}</span>
+                <span class="g-stats-list__unit">answers</span>
+            </li>
+        </ul>
+
+        {% if user.is_authenticated and user.id != question.author.id %}
+        <div class="g-vote-controls card__vote-controls">
+            <button class="g-vote-controls__button btn btn--color_green">▲</button>
+            <button class="g-vote-controls__button btn btn--color_red">▼</button>
+        </div>
+        {% endif %}
+    </div>
+
+    <header class="card__header">
+        <a class="card__link" href="{% url 'question' id=question.id %}">
+            <h3 class="card__title">{{ question.title }}</h3>
+        </a>
+    </header>
+
+    <div class="card__body">
+        <div class="card__text">
+            {% for paragraph in question.text|split_paragraphs %}
+            <p class="card__paragraph">
+                {{ paragraph|safe }}
+            </p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer class="card__footer">
+        <ul class="tags-list card__tags-list">
+            {% for tag in question.tags %}
+            <li class="tags-list__item">
+                <a class="tag" href="{% url 'tag' tag=tag.name %}">{{ tag.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </footer>
+
+    {% if user.is_authenticated and user.id == question.author.id %}
+    <div class="card__actions-list">
+        <ul class="g-actions-list">
+            <li class="g-actions-list__item">
+                <a
+                    class="card__action btn btn--color_orange"
+                    href="{% url 'question_edit' id=question.id %}"
+                >Edit</a>
+            </li>
+
+            <li class="g-actions-list__item">
+                <a
+                    class="card__action btn btn--color_red"
+                    href="{% url 'question_delete' id=question.id %}"
+                >Delete</a>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
+</article>

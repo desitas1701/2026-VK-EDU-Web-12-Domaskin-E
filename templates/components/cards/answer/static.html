@@ -1,0 +1,82 @@
+{% load static %}
+{% load custom_tags %}
+
+<article class="card card--type_static-answer">
+    <div class="card__meta">
+        <div class="g-author card__author">
+            <img
+                class="g-author__avatar img img--size_md"
+                src="{% static answer.author.avatar_url %}"
+                alt="Avatar of {{ answer.author.nickname }}"
+            />
+            <a class="g-author__link" href="{% url 'user' id=answer.author.id %}">
+                <span class="g-author__nickname">{{ answer.author.nickname }}</span>
+            </a>
+        </div>
+
+        {% if answer.status == 1 %}
+        <span class="card__status card__status--color_green">Correct</span>
+        {% elif answer.status == 2 %}
+        <span class="card__status card__status--color_red">Incorrect</span>
+        {% endif %}
+
+        <ul class="g-stats-list card__stats-list">
+            <li class="g-stats-list__item g-stats-list__item--important">
+                <span class="g-stats-list__number">{{ answer.votes }}</span>
+                <span class="g-stats-list__unit">votes</span>
+            </li>
+        </ul>
+
+        {% if user.is_authenticated and user.id != answer.author.id %}
+        <div class="g-vote-controls card__vote-controls">
+            <button class="g-vote-controls__button btn btn--color_green">▲</button>
+            <button class="g-vote-controls__button btn btn--color_red">▼</button>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="card__body">
+        <div class="card__text">
+            {% for paragraph in answer.text|split_paragraphs %}
+            <p class="card__paragraph">
+                {{ paragraph|safe }}
+            </p>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+        {% if user.id == answer.author.id %}
+        <div class="card__actions-list">
+            <ul class="g-actions-list">
+                <li class="g-actions-list__item">
+                    <a
+                        class="card__action btn btn--color_orange"
+                        href="{% url 'question_edit' id=question.id %}"
+                    >Edit</a>
+                </li>
+
+                <li class="g-actions-list__item">
+                    <button class="card__action btn btn--color_red">Delete</button>
+                </li>
+            </ul>
+        </div>
+        {% elif user.id == question.author.id %}
+        <div class="card__actions-list">
+            <ul class="g-actions-list">
+                <li class="g-actions-list__item">
+                    <button class="card__action btn btn--color_green">Correct</button>
+                </li>
+        
+                <li class="g-actions-list__item">
+                    <button class="card__action btn btn--color_white">Unknown</button>
+                </li>
+        
+                <li class="g-actions-list__item">
+                    <button class="card__action btn btn--color_red">Incorrect</button>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+    {% endif %}
+</article>

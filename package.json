@@ -1,0 +1,10 @@
+{
+    "name": "ask-pupkin",
+    "devDependencies": {
+        "sass": "^1.99.0"
+    },
+    "scripts": {
+        "dev": "sass --watch static/scss:static/css",
+        "build": "sass static/scss:static/css"
+    }
+}

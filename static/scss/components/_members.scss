@@ -1,0 +1,11 @@
+.members-list {
+    list-style: none;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--font-size-base);
+}
+
+.members-list__item {}
+
+.member {}
